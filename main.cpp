@@ -31,6 +31,7 @@ public:
 	void show_records();
 	void del_record();
 	void show_detail(int id);
+	void add_val(int val){ this->val += val;}
 
 private:
     string name;
@@ -103,12 +104,18 @@ public:
 	void show_blocks();
 	void del_block();
 	void add_block(string name);
-
-private:
+	block& get_block(string name);
+	
+//private:
 	vector<block> list_blocks;
 };
 
-
+block& blocks::get_block(string name)
+{
+	for(int i = 0; i < list_blocks.size(); i++)
+		if(list_blocks[i].get_name() == name)
+			return list_blocks[i];
+}
 
 void blocks::show_blocks()
 {
@@ -156,6 +163,7 @@ public:
 	void show_records();
 	void del_record();
 	void show_detail();
+	void allocation_mouny(int val, block &b);	
 
 private:
 	int val;
@@ -165,6 +173,19 @@ private:
 repository::repository()
 :val(0)
 {
+}
+
+void repository::allocation_mouny(int val, block &b)
+{
+	if(this->val == 0)
+	{
+		cout << "not enough mouny" << endl;
+	}
+	else if(val <= this->val)
+	{	
+		this->val -= val;
+		b.add_val(val);
+	}
 }
 	
 void repository::del_record()
@@ -219,5 +240,33 @@ void repository::show_detail()
 
 int main()
 {
+	repository r;
+	r.add_record(10000, "help");	
+
+	blocks b;
+	b.add_block("food");
+	b.show_blocks();
+
+	r.allocation_mouny(2000, b.get_block("food"));
+	b.show_blocks();
+
+	b.list_blocks[0].add_record(100, "sandwich");
+	b.show_blocks();
+	
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

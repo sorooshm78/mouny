@@ -288,7 +288,6 @@ int main()
 	blocks b;
 		
 	vector<string> ls_command;
-
 	
 	do{	
 		ls_command = read_command();
@@ -303,10 +302,17 @@ int main()
 				}
 			}
 		}
-	}
-	while(ls_command[0] != "exit");
+	
+		if(ls_command[0] == "show")
+		{
+			if(ls_command[1] == "blocks" or ls_command[1] == "-b")
+			{
+				b.show_blocks();
+			}
+		}
 
-	b.show_blocks();
+	}
+	while(ls_command[0] != "exit" or ls_command[0] != "q");
 
 /*
 	r.add_record(10000, "help");	

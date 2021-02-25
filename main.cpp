@@ -97,7 +97,20 @@ void block::show_detail(int id)
 
 ////////////////////////////////////////////////
 
-void show_blocks(vector<block> &list_blocks)
+class blocks
+{
+public:
+	void show_blocks();
+	void del_block();
+	void add_block(string name);
+
+private:
+	vector<block> list_blocks;
+};
+
+
+
+void blocks::show_blocks()
 {
 	cout << "list blocks:" << endl;
 
@@ -108,10 +121,10 @@ void show_blocks(vector<block> &list_blocks)
 	}
 }
 
-void del_block(vector<block> &list_blocks)
+void blocks::del_block()
 {
 	int input;
-	show_blocks(list_blocks);
+	show_blocks();
 
 	while(true)
 	{
@@ -128,7 +141,7 @@ void del_block(vector<block> &list_blocks)
 	}	
 }
 
-void add_block(vector<block> &list_blocks, string name)
+void blocks::add_block(string name)
 {
 	list_blocks.push_back(block(name));
 }
@@ -206,27 +219,5 @@ void repository::show_detail()
 
 int main()
 {
-    vector<block> list_blocks;
-	
-	add_block(list_blocks, "food");	
-
-	repository r;
-
-//	r.add_record(10, "hoghog");
-//	r.show_records();
-//	r.show_detail();
-//	r.del_record();
-//	r.show_detail();
-
-
-//	add_block(list_blocks, "funny");	
-//	show_blocks(list_blocks);
-//	list_blocks[0].add_record(10, "an");
-//	show_blocks(list_blocks);
-//	list_blocks[0].del_record();
-//	list_blocks[0].show_records();
-//	show_blocks(list_blocks);
-//	del_block(list_blocks);
-		
     return 0;
 }

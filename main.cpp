@@ -238,12 +238,66 @@ void repository::show_detail()
 
 ////////////////////////////////////////////////
 
+vector<string> read_command()
+{
+	vector<string> list_command;
+	string command;
+	string word;
+
+	getline(cin ,command);
+	
+	for(int i = 0; i < command.size(); i++)
+	{
+		if(command[i] == '"')
+		{
+			i++;
+			while(command[i] != '"')
+			{
+				word.push_back(command[i]);
+				i++;
+			}
+
+			list_command.push_back(word);
+			word.clear();
+	
+			continue;
+		}
+
+		if(command[i] == ' ' or i == command.size() -1)
+		{
+			if(i == command.size() - 1)
+				word.push_back(command[i]);
+
+			if(word.size() != 0)
+			{
+				list_command.push_back(word);
+				word.clear();
+			}
+		}		
+		else
+		{
+			word.push_back(command[i]);
+		}
+	}
+	return list_command;
+}
+
 int main()
 {
 	repository r;
+	blocks b;
+	
+	vector<string> ls_command = read_command();
+
+	if(ls_command[0] == "new")
+	{
+		
+	}
+
+
+/*
 	r.add_record(10000, "help");	
 
-	blocks b;
 	b.add_block("food");
 	b.show_blocks();
 
@@ -252,7 +306,7 @@ int main()
 
 	b.list_blocks[0].add_record(100, "sandwich");
 	b.show_blocks();
-	
+*/	
     return 0;
 }
 

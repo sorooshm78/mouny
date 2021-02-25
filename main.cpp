@@ -286,14 +286,27 @@ int main()
 {
 	repository r;
 	blocks b;
-	
-	vector<string> ls_command = read_command();
-
-	if(ls_command[0] == "new")
-	{
 		
-	}
+	vector<string> ls_command;
 
+	
+	do{	
+		ls_command = read_command();
+
+		if(ls_command[0] == "new")
+		{
+			if(ls_command[1] == "block" or ls_command[1] == "-b")
+			{
+				if(ls_command[2] == "name" or ls_command[2] == "-n")
+				{	
+					b.add_block(ls_command[3]);			
+				}
+			}
+		}
+	}
+	while(ls_command[0] != "exit");
+
+	b.show_blocks();
 
 /*
 	r.add_record(10000, "help");	

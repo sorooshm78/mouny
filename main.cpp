@@ -384,6 +384,13 @@ int main()
 			b.get_block(name).add_record(val, comment);
 		}
 		
+		//DELETE
+		if(ls_command[0] == "del")
+		{
+			if(ls_command[1] == "block" or ls_command[1] == "-b")
+				b.del_block();
+		}
+	
 		// ALLOCATION
 		if(ls_command[0] == "alloc")
 		{
@@ -401,13 +408,6 @@ int main()
 			r.allocation_mouny(val, b.get_block(name));
 		}
 		
-		//DELETE
-		if(ls_command[0] == "del")
-		{
-			if(ls_command[1] == "block" or ls_command[1] == "-b")
-				b.del_block();
-		}
-
 	}
 	while(ls_command[0] != "exit");
 

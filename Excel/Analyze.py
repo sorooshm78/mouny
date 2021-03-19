@@ -28,6 +28,7 @@ class Block:
 
 Block_Data = pandas.read_excel('System_Money.xlsx', sheet_name = 'blocks')
 Expend_Data = pandas.read_excel('System_Money.xlsx', sheet_name = 'expend')
+Allocation_Data = pandas.read_excel('System_Money.xlsx', sheet_name = 'allocation')
 
 # Initialize list obj blocks from Excel
 
@@ -36,33 +37,27 @@ List_Block = []
 for index_row, row in Block_Data.iterrows():
 	List_Block.append(Block(row['Name']))
 
-"""
-# print obj
-for obj in List_Block:
-	obj.print()
-"""
 
-"""
-for index_row, row in Expend_Data.iterrows():
-	for index_list in range(len(List_Block)):
-		if row['Block']	== List_Block[index_list].name:
-			print("block " + row['Block'] + "is exist")
-"""
+# function
 
-def find_object(list_block, name):
+def find_obj(name):
 	for index_list in range(len(List_Block)):
 		if name	== List_Block[index_list].name:
 			return List_Block[index_list]
 
 
+# Initialize class from Excel
+
 for index_row, row in Expend_Data.iterrows():
+	find_obj(row['Block']).add_expend(row['Val'])
+
+for index_row, row in Allocation_Data.iterrows():
+	find_obj(row['Block']).add_allocation(row['Val'])
 
 
-
-
-
-
-
+# print obj
+for obj in List_Block:
+	obj.print()
 
 
 

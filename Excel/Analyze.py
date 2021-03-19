@@ -30,6 +30,7 @@ Block_Data = pandas.read_excel('System_Money.xlsx', sheet_name = 'blocks')
 Expend_Data = pandas.read_excel('System_Money.xlsx', sheet_name = 'expend')
 Allocation_Data = pandas.read_excel('System_Money.xlsx', sheet_name = 'allocation')
 
+
 # Initialize list obj blocks from Excel
 
 List_Block = []
@@ -46,10 +47,13 @@ def find_obj(name):
 			return List_Block[index_list]
 
 
-# Initialize class from Excel
+# Extraction expend data from Excel
 
 for index_row, row in Expend_Data.iterrows():
 	find_obj(row['Block']).add_expend(row['Val'])
+
+
+# Extraction allocation data from Excel
 
 for index_row, row in Allocation_Data.iterrows():
 	find_obj(row['Block']).add_allocation(row['Val'])

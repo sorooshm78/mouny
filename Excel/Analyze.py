@@ -1,5 +1,7 @@
 import pandas
+import openpyxl
 import pandas as pd
+from openpyxl import Workbook
 
 # Class Record
 class Record:
@@ -66,7 +68,21 @@ for index_row, row in Expend_Data.iterrows():
 for index_row, row in Allocation_Data.iterrows():
 	find_obj(row['Block']).add_allocation(row['Val'])
 
-# print obj
-for obj in List_Block:
-	print("-------------------------")
-	obj.print()
+# Insert Analyze date to Excel
+Excel_file = 'Analyze_file.xlsx'
+
+book = Workbook()
+
+for block in List_Block:
+	sheet = book.create_sheet(block.name)	
+	sheet.append(["comment", "val", "data"])
+	for record in block.list_record:
+		sheet.append([record.comment, record.val, record.data])
+
+	sheet.append(["", "", ""])
+	sheet.append(["Allocation", block.allocation, "***"])
+	sheet.append(["Expend", block.expend, "***"])
+	sheet.append(["Remaining", block.get_remaining(), "***"])
+
+del book['Sheet']
+book.save(Excel_file)
